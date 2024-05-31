@@ -23,8 +23,8 @@ This repository contains the backend for the job search web application using Dj
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/job-search-backend.git
-cd job-search-backend
+git clone https://github.com/devshoaibsarwar/job-hunter-backend.git
+cd job-search-backend/api
 ```
 
 ## Step 2: Create a Virtual Environment
