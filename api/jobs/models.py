@@ -1,4 +1,5 @@
 from djongo import models
+from .utils import make_ngrams
 
 class Job(models.Model):
     post_id = models.CharField(max_length=255, unique=True)
@@ -22,6 +23,11 @@ class Job(models.Model):
     country = models.CharField(max_length=100, null=True)
     job_published_at = models.DateTimeField(null=True)
     last_indexed = models.DateTimeField()
+    ngrams = models.TextField()
+
+    def save(self, *args, **kwargs):
+        self.ngrams = ' '.join(make_ngrams(self.job_name))
+        super(Job, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.job_name

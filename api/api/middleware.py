@@ -43,6 +43,5 @@ class TokenAuthenticationMiddleware:
             response = {'message': 'User not found'}
             return JsonResponse(response, status=status.HTTP_404_NOT_FOUND)
 
-        print(request.path_info)
         response = self.get_response(request)
         return response
