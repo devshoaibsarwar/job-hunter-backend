@@ -11,9 +11,11 @@ def job_search(request):
 
     try:
         if job_title:
-            query_ngrams = ' '.join(make_ngrams(job_title))
-
-            jobs = Job.objects.filter(Q(ngrams__icontains=query_ngrams))
+            ngrams = make_ngrams(job_title)
+            query = Q()
+            for ngram in ngrams:
+                query |= Q(job_name__icontains=ngram)
+            jobs = Job.objects.filter(query)
         else:
             jobs = Job.objects.all()
 
@@ -21,7 +23,7 @@ def job_search(request):
 
         if not job_list:
             return Response({'message': 'No jobs found', 'data': []}, status=status.HTTP_404_NOT_FOUND)
-
+        
         return Response({'data': job_list}, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({'message': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
