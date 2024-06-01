@@ -20,7 +20,7 @@ This repository contains the backend for the job search web application using Dj
 
 ## Setup Instructions
 
-### Step 1: Clone the Repository
+## Step 1: Clone the Repository
 
 ```bash
 git clone https://github.com/devshoaibsarwar/job-hunter-backend.git
@@ -69,7 +69,18 @@ mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=tr
 
 - Run the following command to apply database migrations:
 
-## Step 7: Seed Data
+## Step 7: Create Index in MongoDB:
+
+- Run the following command in your MongoDB shell or client to create the text index:
+
+```bash
+db.your_collection_name.createIndex(
+    { "ngrams": "text" },
+    { name: "ngrams_text_index", weights: { "ngrams": 100 } }
+)
+```
+
+## Step 8: Seed Data
 
 - Run command below to populate sample data to database
 
@@ -77,7 +88,7 @@ mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=tr
 python3 seed.py
 ```
 
-## Step 8: Run the Development Server
+## Step 9: Run the Development Server
 
 - Start the Django development server:
 
